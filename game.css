@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    color: #333;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    line-height: 1.5rem;
+    
+  }
+
+.wrapper {
+    width: 25rem;
+    height: 35rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border: 0.1rem solid #888;
+    border-radius: 1rem;
+}
+
+.wrapper > * {
+    padding: 2rem;
+}
+
+.header h1 {
+    font-family: 'Noto Serif', serif;
+    font-size: 2.5rem;
+}
+
+.main {
+    min-height: 20rem;
+}
+
+.message {
+    min-height: 3rem;
+}
+
+.game {
+    width: 25rem;
+    display: inline-flex;
+    align-items: stretch;
+}
+
+.dealer, .player {
+    min-width: 10rem;
+    min-height: 12rem;
+    margin-right: 1rem;
+    padding: 1rem 0;
+}
+
+h4 {
+    margin: 0.5rem 0;
+}
+
+.score {
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.winner {
+    min-height: 2rem;
+}
+
+.footer {
+    font-size: 0.75rem;
+}
+
+button {
+    border: 0;
+    border-radius: 0.25rem;
+    background: darkgoldenrod;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    white-space: nowrap;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: background 250ms ease-in-out;
+  
+}
+
+button:hover,
+button:focus {
+    background: goldenrod;
+}
+
+a {
+    color: darkgoldenrod;
+}
+
+a:hover {
+    color: goldenrod;
+}

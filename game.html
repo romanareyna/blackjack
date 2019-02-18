@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Blackjack</title>
+		<meta charset="utf-8" />
+    <link rel="stylesheet" href="game.css">
+  </head>
+
+  <body>
+      <div class="wrapper">
+          <header class="header">
+              <h1 class="title">Blackjack</h1>
+          </header>
+          <main class="main"><div class="container">
+              <div class="message">
+                  <p id="message">Welcome to Blackjack!</p>
+              </div>
+              <div class="game" id="game-table">
+                  <div class="dealer">
+                      <h4>Dealer has:</h4>
+                      <p id="dealer-cards"></p>
+                      <p class="score">Score: <span id="dealer-score"></span></p>
+                  </div>
+                  <div class="player">
+                      <h4>Player has:</h4>
+                      <p id="player-cards"></p>
+                      <p class="score">Score: <span id="player-score"></span></p>
+                  </div>
+              </div>
+              <div class="winner">
+                  <h4 id="winner-announcement">Best of luck!</h4>
+              </div>
+              <div class="buttons">
+                   <button id="new-game-button">New Game!</button>
+                   <button id="hit-button">Hit!</button>
+                   <button id="stay-button">Stay</button>            
+              </div>
+            </main>
+          <footer class="footer">
+                Created with the help of <a href="pluralsight.com">Pluralsight</a>.
+          </footer>
+      </div>
+
+      <script src="game.js"></script>
+  </body>
+  
+</html>
