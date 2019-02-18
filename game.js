@@ -18,7 +18,8 @@ let message = document.getElementById('message'),
     newGameButton = document.getElementById('new-game-button'),
     hitButton = document.getElementById('hit-button'),
     stayButton = document.getElementById('stay-button'),
-    gameTable = document.getElementById('game-table');
+    gameTable = document.getElementById('game-table'),
+    quitButton = document.getElementById('quit-button');
 
 // Game variables
 let gameStarted = false,
@@ -30,12 +31,15 @@ let gameStarted = false,
     playerScore = 0,
     deck = [];
 
+// Hiding DOM elements till the Game has started
 gameTable.style.display = 'none';
 winnerAnnouncement.style.display = 'none';
 hitButton.style.display = 'none';
 stayButton.style.display = 'none';
+quitButton.style.display = 'none';
 showStatus();
 
+// Adding "New Game!" button listener
 newGameButton.addEventListener('click', function() {
     gameStarted = true;
     gameOver = false;
@@ -52,22 +56,30 @@ newGameButton.addEventListener('click', function() {
     newGameButton.style.display = 'none';
     hitButton.style.display = 'inline';
     stayButton.style.display = 'inline';
+    quitButton.style.display = 'none';
     showStatus();
 });
 
-
+// Adding "Hit!" button listener
 hitButton.addEventListener('click', function() {
     playerCards.push(getNextCard());
     checkForEndOfGame();
     showStatus();
   });
-  
-  stayButton.addEventListener('click', function() {
+
+// Adding "Stay" button listener 
+stayButton.addEventListener('click', function() {
     gameOver = true;
     checkForEndOfGame();
     showStatus();
   });  
 
+// Adding "Quit" button listener
+quitButton.addEventListener('click', function() {
+    quitTheGame();
+});
+
+// Creating a new deck of cards
 function createDeck() {
   let deck = [];
   for (let i = 0; i < suits.length; i++) {
@@ -82,6 +94,7 @@ function createDeck() {
   return deck;
 }
 
+// Shuffling the deck
 function shuffleDeck(deck) {
     for (let i = 0; i < deck.length; i++) {
         let x = Math.trunc(Math.random() * deck.length);
@@ -91,10 +104,12 @@ function shuffleDeck(deck) {
     }
 }
 
+// Getting cards named (joining variables into a String)
 function getCardString(card) {
   return card.value + ' of ' + card.suit;
 }
 
+// Getting card value for calculating scores
 function getCardNumericValue(card) {
     switch(card.value) {
       case 'Ace':
@@ -120,6 +135,7 @@ function getCardNumericValue(card) {
     }
   }
   
+  // Calculating scores
   function getScore(cardArray) {
     let score = 0;
     let hasAce = false;
@@ -136,11 +152,13 @@ function getCardNumericValue(card) {
     return score;
   }
   
+  // Updating players' scores
   function updateScores() {
     dealerScore = getScore(dealerCards);
     playerScore = getScore(playerCards);
   }
   
+  // Checking if the game is over
   function checkForEndOfGame() {
     updateScores();
     if(gameOver){
@@ -171,7 +189,8 @@ function getCardNumericValue(card) {
       }
     }
   }
-  
+
+// Updating the DOM while playing
 function showStatus() {
     if (!gameStarted) {
         message.innerText = "Welcome to Blackjack!";
@@ -201,23 +220,12 @@ function showStatus() {
     playerCardsMessage.innerText = playerCardString;
     playerScoreMessage.innerText = playerScore;
 
-    /*
-                        'Dealer has:\n' +
-                        dealerCardString +
-                        '(score: ' + dealerScore + ')\n\n' +
-
-                        'Player has:\n' +
-                        playerCardString +
-                        '(score: ' + playerScore + ')\n\n';
-    */
     winnerAnnouncement.style.display = 'block';
 
     if (playerScore === 21 && playerCards.length === 2) {
-        winnerAnnouncement.innerText = 'BLACKJACK! YOU WON!';
+        winnerAnnouncement.innerText = 'Blackjack! YOU WON!';
         message.innerText = 'OMG! Lucky you!'
-        newGameButton.style.display = 'inline';
-        hitButton.style.display = 'none';
-        stayButton.style.display = 'none';
+        showGameOverButtons();
     }
 
     if (gameOver) {
@@ -228,13 +236,40 @@ function showStatus() {
             winnerAnnouncement.innerText = 'DEALER WINS';
             message.innerText = "That's fine! Try once again!";
         }
-        newGameButton.style.display = 'inline';
-        hitButton.style.display = 'none';
-        stayButton.style.display = 'none';
+        showGameOverButtons();
     }
 }
 
+// Pulling nex card out of the deck
 function getNextCard() {
     return deck.shift();
-  }
-  
+}
+
+// Showing "New Game!" and "Quit" buttons
+// and hiding "Hit!" and "Stay" buttons
+function showGameOverButtons() {
+    newGameButton.style.display = 'inline';
+    hitButton.style.display = 'none';
+    stayButton.style.display = 'none';
+    quitButton.style.display = 'inline';
+}
+
+// Resetting the DOM and variables
+function quitTheGame() {
+    gameTable.style.display = 'none';
+    winnerAnnouncement.style.display = 'none';
+    newGameButton.style.display = 'inline';
+    hitButton.style.display = 'none';
+    stayButton.style.display = 'none';
+    quitButton.style.display = 'none';
+    message.innerText = 'Thanks for playing! See you soon!';
+
+    gameStarted = false;
+    gameOver = false;
+    playerWon = false;
+    dealerCards = [];
+    playerCards = [];
+    dealerScore = 0;
+    playerScore = 0;
+    deck = [];
+}
